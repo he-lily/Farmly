@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <include
+        android:id="@+id/select_cat_act"
         layout="@layout/content_select_categories"
         android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,16 +45,262 @@
         app:layout_constraintTop_toBottomOf="@+id/catergories_title" />
 
     <CheckBox
-        android:layout_width="109dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="108dp"
-        android:button="@android:drawable/btn_default"
-        android:text="fitness"
+        android:id="@+id/fitness_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/fitness"
+        android:fontFamily="@font/comfortaa"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/catergories_title" />
+        app:layout_constraintTop_toBottomOf="@+id/category_description" />
 
+    <CheckBox
+        android:id="@+id/music_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/music"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fitness_cb" />
+
+    <CheckBox
+        android:id="@+id/house_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/house_amp_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintStart_toEndOf="@+id/sports_cb"
+        app:layout_constraintTop_toBottomOf="@+id/food_cb" />
+
+    <CheckBox
+        android:id="@+id/sports_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/sports"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/music_cb" />
+
+    <CheckBox
+        android:id="@+id/beauty_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/beauty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/social_cb" />
+
+    <CheckBox
+        android:id="@+id/medical_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/medical"
+        app:layout_constraintEnd_toStartOf="@+id/productivity_cb"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/beauty_cb" />
+
+    <CheckBox
+        android:id="@+id/lifestyle_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/lifestyle"
+        app:layout_constraintEnd_toStartOf="@+id/entertain_cb"
+        app:layout_constraintHorizontal_bias="0.591"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medical_cb" />
+
+    <CheckBox
+        android:id="@+id/social_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/social"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sports_cb" />
+
+    <CheckBox
+        android:id="@+id/parenting_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/parenting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.143"
+        app:layout_constraintStart_toEndOf="@+id/beauty_cb"
+        app:layout_constraintTop_toBottomOf="@+id/house_cb" />
+
+    <CheckBox
+        android:id="@+id/photo_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/photography"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintStart_toEndOf="@+id/beauty_cb"
+        app:layout_constraintTop_toBottomOf="@+id/parenting_cb" />
+
+    <CheckBox
+        android:id="@+id/productivity_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/productivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.149"
+        app:layout_constraintStart_toEndOf="@+id/beauty_cb"
+        app:layout_constraintTop_toBottomOf="@+id/photo_cb" />
+
+    <CheckBox
+        android:id="@+id/entertain_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/entertainment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintStart_toEndOf="@+id/beauty_cb"
+        app:layout_constraintTop_toBottomOf="@+id/productivity_cb" />
+
+    <CheckBox
+        android:id="@+id/edu_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/education"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/fitness_cb"
+        app:layout_constraintTop_toBottomOf="@+id/category_description" />
+
+    <CheckBox
+        android:id="@+id/gaming_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/gaming"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/food_cb"
+        app:layout_constraintTop_toBottomOf="@+id/finance_cb" />
+
+    <CheckBox
+        android:id="@+id/dating_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/dating"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toEndOf="@+id/house_cb"
+        app:layout_constraintTop_toBottomOf="@+id/gaming_cb" />
+
+    <CheckBox
+        android:id="@+id/shopping_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/shopping"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintStart_toEndOf="@+id/parenting_cb"
+        app:layout_constraintTop_toBottomOf="@+id/dating_cb" />
+
+    <CheckBox
+        android:id="@+id/art_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/art"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintStart_toEndOf="@+id/photo_cb"
+        app:layout_constraintTop_toBottomOf="@+id/shopping_cb" />
+
+    <CheckBox
+        android:id="@+id/travel_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/travel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toEndOf="@+id/entertain_cb"
+        app:layout_constraintTop_toBottomOf="@+id/news_cb2" />
+
+    <CheckBox
+        android:id="@+id/news_cb2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/news"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.218"
+        app:layout_constraintStart_toEndOf="@+id/productivity_cb"
+        app:layout_constraintTop_toBottomOf="@+id/art_cb" />
+
+    <CheckBox
+        android:id="@+id/finance_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/finance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/edu_cb"
+        app:layout_constraintTop_toBottomOf="@+id/category_description" />
+
+    <CheckBox
+        android:id="@+id/food_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/food_amp_drink"
+        app:layout_constraintStart_toEndOf="@+id/music_cb"
+        app:layout_constraintTop_toBottomOf="@+id/edu_cb" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
