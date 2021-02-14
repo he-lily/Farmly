@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.util.List;
+
 public class UserDataBaseHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "UserInfo.db";
@@ -19,6 +21,8 @@ public class UserDataBaseHelper extends SQLiteOpenHelper {
     private static String COLUMN_NAME = "user_name";
     private static String COLUMN_JOB = "user_job";
     private static String COLUMN_AGE = "user_age";
+    private static String COLUMN_OS = "system_os";
+    private static String COLUMN_HABITS = "screen_time_habits";
 
     public UserDataBaseHelper(@Nullable Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
@@ -27,12 +31,14 @@ public class UserDataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         String query =
-                "CREATE TABLE " + TABLE_NAME +
-                " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_EMAIL + " TEXT, " +
-                COLUMN_NAME  + " TEXT, " +
-                COLUMN_JOB   + " TEXT, " +
-                COLUMN_AGE   + " INTEGER);";
+                "CREATE TABLE " + TABLE_NAME + " (" +
+                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COLUMN_EMAIL  + " TEXT, " +
+                        COLUMN_NAME   + " TEXT, " +
+                        COLUMN_JOB    + " TEXT, " +
+                        COLUMN_AGE    + " INTEGER, " +
+                        COLUMN_OS     + " TEXT, " +
+                        COLUMN_HABITS + " TEXT);";
         db.execSQL(query);
     }
     @Override
@@ -42,7 +48,7 @@ public class UserDataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    void addUser(String user_email, String user_name, String user_job, int user_age){
+    void addUser(String user_email, String user_name, String user_job, int user_age, String app_usage){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -50,6 +56,9 @@ public class UserDataBaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_NAME,user_name);
         cv.put(COLUMN_JOB,user_job);
         cv.put(COLUMN_AGE,user_age);
+        cv.put(COLUMN_OS,System.getProperty("os.name"));
+        cv.put(COLUMN_HABITS, app_usage);
+
         long result = db.insert(TABLE_NAME,null,cv);
         if(result == -1){
             Toast.makeText(context,"Failed",Toast.LENGTH_SHORT).show();
