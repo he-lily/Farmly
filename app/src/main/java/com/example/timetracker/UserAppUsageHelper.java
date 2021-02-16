@@ -44,21 +44,25 @@ public class UserAppUsageHelper {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void gatherAppUsageHistory(){
+    public List<String> gatherAppUsageHistory(){
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -1);
-
         UsageStatsManager mUsageStatsManager = (UsageStatsManager)context.getSystemService(Context.USAGE_STATS_SERVICE);
         List<UsageStats> queryUsageStats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_YEARLY, cal.getTimeInMillis(), System.currentTimeMillis());
 
         HashMap<String,Double> allUsedApps = new HashMap<>();
+        List<String> allApps =  new ArrayList<>();
         double totalAppUsageTime = 0.0;
         for (UsageStats us : queryUsageStats) {
             double currTotal = us.getTotalTimeInForeground() / 1000.0;
+
+            String[] parts = us.getPackageName().split("\\.");
             if (currTotal > 0) {
                 totalAppUsageTime += currTotal;
-                allUsedApps.put(us.getPackageName(), currTotal);
+                allUsedApps.put(parts[parts.length - 1], currTotal);
+                allApps.add(parts[parts.length - 1]); //need to find way that more apps are included
             }
+
         }
 
         List<String> top5Apps = getTop5AppsUsed(allUsedApps);
@@ -69,6 +73,10 @@ public class UserAppUsageHelper {
         System.out.println(totalAppUsageTime);
         System.out.println("TOP 5 APPS:");
         System.out.println(top5Apps);
+        System.out.println("ALL APPS:");
+        System.out.println(allApps);
+
+        return allApps;
     }
 
     private List<String> getTop5AppsUsed(HashMap<String,Double> allApps){
@@ -88,6 +96,7 @@ public class UserAppUsageHelper {
 
         return top5;
     }
+
 
     // Discuss with group if should be added. Have a method... But would not adhere to our set
     // definition of categories, requires communicating with the app store, and parsing JSON
