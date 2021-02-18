@@ -11,8 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TimeTracker">
-        <activity android:name=".setNotifications"></activity>
-        <activity android:name=".PickApps" />
+        <activity android:name=".PickApps"></activity>
         <activity android:name=".AppDescript2" />
         <activity android:name=".AppDescript1" />
         <activity

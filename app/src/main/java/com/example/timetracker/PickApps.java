@@ -5,14 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.List;
 
 public class PickApps extends AppCompatActivity {
     List<String> allApps;
     RecyclerView recyclerView;
+    Button pickAppsButton;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,13 @@ public class PickApps extends AppCompatActivity {
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
+        /** Added button functionality here so we can get to the next activity. Change anything if you need to. **/
+        pickAppsButton = findViewById(R.id.save_apps);
+        pickAppsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                Intent intent = new Intent(PickApps.this, SetLimits.class);
+                startActivity(intent);
+            }
+        });
     }
 }
