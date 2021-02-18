@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.timetracker">
+    package="com.example.timetracker" >
 
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
 
@@ -10,15 +10,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TimeTracker">
-        <activity android:name=".PickApps"></activity>
+        android:theme="@style/Theme.TimeTracker" >
+        <activity android:name=".TitleScreen" >
+        </activity>
+        <activity android:name=".GeneratingPlan" />
+        <activity android:name=".SetLimits" />
+        <activity android:name=".PickApps" />
         <activity android:name=".AppDescript2" />
         <activity android:name=".AppDescript1" />
         <activity
             android:name=".SelectCategories"
             android:label="@string/title_activity_select_categories"
             android:theme="@style/Theme.TimeTracker.NoActionBar" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
