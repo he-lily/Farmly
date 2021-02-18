@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AppDescript2">
-
+<!--
     <Button
         android:id="@+id/descript2_button"
         android:layout_width="wrap_content"
@@ -26,3 +26,64 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+-->
+
+<!-- BELOW is Jeff's Code, ABOVE is Sydney's Code. Please comment out one of them while you're editing.-->
+    
+    <TextView
+    android:id="@+id/textView4"
+    android:layout_width="321dp"
+    android:layout_height="61dp"
+    android:fontFamily="sans-serif-black"
+    android:text="Help make your screen productive"
+    android:textAlignment="center"
+    android:textColor="#8BC34A"
+    android:textSize="25sp"
+    android:textStyle="bold"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.252"
+    android:gravity="center_horizontal" />
+
+    <TextView
+    android:id="@+id/textView5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="We have over 200 apps to recommend \nbased on your interests."
+    android:textAlignment="center"
+    android:textSize="18sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.496"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.654"
+    android:gravity="center_horizontal" />
+
+    <Button
+    android:id="@+id/descript2_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="NEXT"
+    app:backgroundTint="#4CAF50"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.498"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.821" />
+
+    <ImageView
+    android:id="@+id/imageView3"
+    android:layout_width="141dp"
+    android:layout_height="141dp"
+    app:layout_constraintBottom_toTopOf="@+id/textView5"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.497"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textView4"
+    app:layout_constraintVertical_bias="0.466"
+    app:srcCompat="@drawable/apps" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
