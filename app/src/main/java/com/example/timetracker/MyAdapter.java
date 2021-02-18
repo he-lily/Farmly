@@ -40,6 +40,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             checkBox = itemView.findViewById(R.id.checkBox3);
+            if(checkBox.isChecked()){
+                System.out.println("THIS CHECK BOX VALUE IS: ");
+                System.out.println(checkBox.getText().toString());
+            }
         }
+
     }
 }

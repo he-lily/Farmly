@@ -42,4 +42,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_apps">Select Apps</string>
     <string name="apps_descript">selects apps you would like to spend less time on.</string>
+    <string name="home">home</string>
 </resources>
