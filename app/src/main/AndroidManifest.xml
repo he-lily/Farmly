@@ -4,7 +4,9 @@
 
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
 
+
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,11 +16,15 @@
         <activity android:name=".PickApps"></activity>
         <activity android:name=".AppDescript2" />
         <activity android:name=".AppDescript1" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SetLimits" />
+        <activity android:name=".setNotifications" />
+
         <activity
             android:name=".SelectCategories"
             android:label="@string/title_activity_select_categories"
             android:theme="@style/Theme.TimeTracker.NoActionBar" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".TitleScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
