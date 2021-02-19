@@ -21,6 +21,8 @@
         <activity android:name=".setNotifications" />
         <activity android:name=".GeneratingPlan" />
         <activity android:name=".BottomNavView"/>
+        <activity android:name=".MainActivityLilyScratch"/>
+        <activity android:name=".GeneratingPlan" />
 
         <activity
             android:name=".SelectCategories"
