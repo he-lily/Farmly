@@ -12,3 +12,4 @@ public class GeneratingPlan extends AppCompatActivity {
         setContentView(R.layout.activity_generating_plan);
     }
 }
+
