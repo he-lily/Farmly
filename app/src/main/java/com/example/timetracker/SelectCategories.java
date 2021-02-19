@@ -59,7 +59,6 @@ public class SelectCategories extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
 
