@@ -1,24 +1,28 @@
 package com.example.timetracker;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivityLilyScratch extends AppCompatActivity {
+//https://www.youtube.com/watch?v=tPV8xA7m-iw this is the video tutorial I followed
+public class BottomNavView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_lily_scratch);
+        setContentView(R.layout.activity_bottom_nav_view);
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
+
+        //args: 1st: container to display fragment in
+        //      2nd: fragment to display upon page opening
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new FragmentPlan()).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -43,13 +47,14 @@ public class MainActivityLilyScratch extends AppCompatActivity {
                             break;
                     }
 
-                    //args: container where we want to display the fragment in, fragment to show
-                    //this line dispalys the selected fragment
+                    //args: container where we want to display the fragment in,
+                    //      fragment to show
+                    //this line displays the selected fragment
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             selectedFragment).commit();
 
                     //true means we want to highlight the selected item
-                    //return false would not highlight the selected item, but still dispaly the fragment
+                    //return false would not highlight the selected item, but still display the fragment
                     return true;
                 }
             };
