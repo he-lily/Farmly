@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class PickApps extends AppCompatActivity {
     List<String> allApps;
     RecyclerView recyclerView;
     Button pickAppsButton;
+    List<String> restrictedApps;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class PickApps extends AppCompatActivity {
         pickAppsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(PickApps.this, SetLimits.class);
+                restrictedApps = myAdapter.checkedItems;
+                System.out.println(restrictedApps);
                 startActivity(intent);
             }
         });

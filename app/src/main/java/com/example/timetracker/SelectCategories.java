@@ -67,43 +67,33 @@ public class SelectCategories extends AppCompatActivity {
         selected_categories = new ArrayList<String>();
         if(fitness.isChecked()){
             selected_categories.add(fitness.getText().toString());
-            System.out.println("yay it's working since I selected it");
         }
         if(edu.isChecked()){
             selected_categories.add(edu.getText().toString());
-            System.out.println("edu yay it's working since I selected it");
         }
         if(finance.isChecked()){
             selected_categories.add(finance.getText().toString());
-            System.out.println("finance yay it's working since I selected it");
         }
         if(music.isChecked()){
             selected_categories.add(music.getText().toString());
-            System.out.println("music yay it's working since I selected it");
         }
         if(food.isChecked()){
             selected_categories.add(food.getText().toString());
-            System.out.println("yay it's working since I selected it");
         }
         if(gaming.isChecked()){
             selected_categories.add(gaming.getText().toString());
-            System.out.println("yay it's working since I selected it");
         }
         if(sports.isChecked()){
             selected_categories.add(sports.getText().toString());
-            System.out.println("sports yay it's working since I selected it");
         }
         if(housing.isChecked()){
             selected_categories.add(housing.getText().toString());
-            System.out.println("housing yay it's working since I selected it");
         }
         if(dating.isChecked()){
             selected_categories.add(dating.getText().toString());
-            System.out.println("dating yay it's working since I selected it");
         }
         if(social.isChecked()){
             selected_categories.add(social.getText().toString());
-            System.out.println("social yay it's working since I selected it");
         }
         if(parenting.isChecked()){
             selected_categories.add(parenting.getText().toString());
