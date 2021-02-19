@@ -20,6 +20,7 @@
         <activity android:name=".SetLimits" />
         <activity android:name=".setNotifications" />
         <activity android:name=".MainActivityLilyScratch"/>
+        <activity android:name=".GeneratingPlan" />
 
         <activity
             android:name=".SelectCategories"
