@@ -14,43 +14,43 @@ class appStoreSpider(scrapy.Spider):
 	name = "appStore"
 
 	def __init__(self):
-		self.MAX_VAL = 20
+		self.MAX_VAL = 100
 		self.all_apps = set() 
 		self.category_dict = defaultdict(list)
 		self.app_pattern = 'https://play\.google\.com/store/apps/details\?id=(\w|.)+'
 		self.valid_categories = {'ART_AND_DESIGN', 'BEAUTY', 'DATING',
-								 'EDUCATION', 'ENTERTAINMENT', 'FINANCE',
-								 'FOOD_AND_DRINK', 'GAME', 'HEALTH_AND_FITNESS',
-								 'HOUSE_AND_HOME', 'LIFESTYLE', 'MEDICAL',
-								 'MUSIC_AND_AUDIO', 'NEWS_AND_MAGAZINES', 'PARENTING',
-								 'PHOTOGRAPHY', 'PRODUCTIVITY', 'SHOPPING',
-								 'SOCIAL', 'SPORTS', 'TRAVEL_AND_LOCAL'}
-		self.log_file    = open("spider_logger.txt", 'w')
-		self.temp        = open("temp.json", 'w')
+					 'EDUCATION', 'ENTERTAINMENT', 'FINANCE',
+					 'FOOD_AND_DRINK', 'GAME', 'HEALTH_AND_FITNESS',
+					 'HOUSE_AND_HOME', 'LIFESTYLE', 'MEDICAL',
+					 'MUSIC_AND_AUDIO', 'NEWS_AND_MAGAZINES', 'PARENTING',
+					 'PHOTOGRAPHY', 'PRODUCTIVITY', 'SHOPPING',
+					 'SOCIAL', 'SPORTS', 'TRAVEL_AND_LOCAL'}
+		self.log_file   = open("spider_logger.txt", 'w')
+		self.categories = open("categories.json", 'w')
 
 
 	def start_requests(self):
 		start_paths = ["https://play.google.com/store/apps/category/ART_AND_DESIGN",
-					   "https://play.google.com/store/apps/category/BEAUTY",
-					   "https://play.google.com/store/apps/category/DATING",
-					   "https://play.google.com/store/apps/category/EDUCATION",
-					   "https://play.google.com/store/apps/category/ENTERTAINMENT",
-					   "https://play.google.com/store/apps/category/FINANCE",
-					   "https://play.google.com/store/apps/category/FOOD_AND_DRINK",
-					   "https://play.google.com/store/apps/category/GAME",
-					   "https://play.google.com/store/apps/category/HEALTH_AND_FITNESS",
-					   "https://play.google.com/store/apps/category/HOUSE_AND_HOME",
-					   "https://play.google.com/store/apps/category/LIFESTYLE",
-					   "https://play.google.com/store/apps/category/MEDICAL",
-					   "https://play.google.com/store/apps/category/MUSIC_AND_AUDIO",
-					   "https://play.google.com/store/apps/category/NEWS_AND_MAGAZINES",
-					   "https://play.google.com/store/apps/category/PARENTING",
-					   "https://play.google.com/store/apps/category/PHOTOGRAPHY",
-					   "https://play.google.com/store/apps/category/PRODUCTIVITY",
-					   "https://play.google.com/store/apps/category/SHOPPING",
-					   "https://play.google.com/store/apps/category/SOCIAL",
-					   "https://play.google.com/store/apps/category/SPORTS",
-					   "https://play.google.com/store/apps/category/TRAVEL_AND_LOCAL"]
+			       "https://play.google.com/store/apps/category/BEAUTY",
+			       "https://play.google.com/store/apps/category/DATING",
+			       "https://play.google.com/store/apps/category/EDUCATION",
+			       "https://play.google.com/store/apps/category/ENTERTAINMENT",
+			       "https://play.google.com/store/apps/category/FINANCE",
+			       "https://play.google.com/store/apps/category/FOOD_AND_DRINK",
+			       "https://play.google.com/store/apps/category/GAME",
+			       "https://play.google.com/store/apps/category/HEALTH_AND_FITNESS",
+			       "https://play.google.com/store/apps/category/HOUSE_AND_HOME",
+			       "https://play.google.com/store/apps/category/LIFESTYLE",
+			       "https://play.google.com/store/apps/category/MEDICAL",
+			       "https://play.google.com/store/apps/category/MUSIC_AND_AUDIO",
+			       "https://play.google.com/store/apps/category/NEWS_AND_MAGAZINES",
+			       "https://play.google.com/store/apps/category/PARENTING",
+			       "https://play.google.com/store/apps/category/PHOTOGRAPHY",
+			       "https://play.google.com/store/apps/category/PRODUCTIVITY",
+			       "https://play.google.com/store/apps/category/SHOPPING",
+			       "https://play.google.com/store/apps/category/SOCIAL",
+			       "https://play.google.com/store/apps/category/SPORTS",
+			       "https://play.google.com/store/apps/category/TRAVEL_AND_LOCAL"]
 		for path in start_paths:
 			yield scrapy.Request(path, self.parse)
 
@@ -73,10 +73,8 @@ class appStoreSpider(scrapy.Spider):
 
 		app_info = response.xpath('//script[@type="application/ld+json"]//text()').extract_first()
 
-
 		if (app_info):
 			app_json = json.loads(app_info)
-
 
 			if 'GAME' in app_json['applicationCategory']:
 				genre = 'GAME'
@@ -105,7 +103,7 @@ class appStoreSpider(scrapy.Spider):
 								if (succeeded):
 									self.all_apps.add(app_id)
 									self.category_dict[genre].append({'name':name, 'url':url, 'logo':app_logo, 'rating_score':rating_score, 
-																	  'review_count': review_count, 'downloads':downloads, 'price':price})
+													  'review_count': review_count, 'downloads':downloads, 'price':price})
 
 									if (len(self.category_dict[genre]) > self.MAX_VAL):
 										self.valid_categories.remove(genre)
@@ -132,5 +130,5 @@ class appStoreSpider(scrapy.Spider):
 
 	def spider_closed(self, spider):
 		self.log_file.close()
-		json.dump(self.category_dict, self.temp)
-		self.temp.close()
+		json.dump(self.category_dict, self.categories)
+		self.categories.close()
