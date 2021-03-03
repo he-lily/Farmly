@@ -4,7 +4,7 @@ from sqlite3 import Error
 
 class GoogleStoreAppDB:
     def __init__(self):
-        self.name       = "BetterGoogleStoreApps.db"
+        self.name       = "GoogleStoreApps.db"
         self.connection = sqlite3.connect(self.name)
         self.cursor     = self.connection.cursor()
 
