@@ -55,7 +55,9 @@ public class SelectCategories extends AppCompatActivity {
             //save info to UserDB and move to next activity
             public void onClick(View view){
                 Intent intent = new Intent(SelectCategories.this,PickApps.class);
-                System.out.println(selected_categories); //list of their perferred apps
+                //UserDataBaseHelper userDB = new UserDataBaseHelper(SelectCategories.this);
+                //userDB.addPreferredCategories(selected_categories.toString());
+                HoldUserInfo.getInstance().setUser_preferred_categories(selected_categories);
                 startActivity(intent);
             }
         });
