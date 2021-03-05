@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,6 +19,7 @@ public class HoldUserInfo {
     private List<String> disliked_apps;
     private List<String> preferred_categories;
     private List<String> has_been_recommended;
+    private Map<String,List<String>> to_be_rec;
 
     public String getUser_name() {return user_name;}
     public void setUser_name(String user_name) {this.user_name = user_name;}
@@ -42,7 +44,16 @@ public class HoldUserInfo {
 
     public List<String> getUser_has_been_recommended() {return has_been_recommended;}
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void setUser_has_been_recommended(List<String> has_been_recommended) {this.has_been_recommended=  has_been_recommended;}
+    public void setUser_has_been_recommended(List<String> has_been_recommended) {
+        if(this.has_been_recommended == null){
+            this.has_been_recommended = has_been_recommended;
+        }
+        else{
+            this.has_been_recommended.addAll(has_been_recommended);
+        }
+    }
+    public void setUser_to_be_rec(Map<String,List<String>> to_be_rec){this.to_be_rec = to_be_rec;}
+    public Map<String,List<String>>  getUser_to_be_rec() {return to_be_rec;}
 
     private static final HoldUserInfo holder = new HoldUserInfo();
     public static HoldUserInfo getInstance() {return holder;}

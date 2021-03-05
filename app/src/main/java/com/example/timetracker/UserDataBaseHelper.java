@@ -59,11 +59,6 @@ public class UserDataBaseHelper extends SQLiteOpenHelper {
     void addUser(String user_email, String user_name, String user_job, int user_age, String app_usage, String has_been_recommended, String preferred_categories, String disliked_apps){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        System.out.println("ADDING THINGS RIGHT NOW\n\n\n");
-        System.out.println("ADDING THINGS RIGHT NOW\n\n\n");
-        System.out.println("ADDING THINGS RIGHT NOW\n\n\n");
-        System.out.println("ADDING THINGS RIGHT NOW\n\n\n");
-        System.out.println("ADDING THINGS RIGHT NOW\n\n\n");
         cv.put(COLUMN_EMAIL,user_email);
         cv.put(COLUMN_NAME,user_name);
         cv.put(COLUMN_JOB,user_job);

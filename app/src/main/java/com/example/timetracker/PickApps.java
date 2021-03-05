@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class PickApps extends AppCompatActivity {
     List<String> allApps;
@@ -43,9 +44,10 @@ public class PickApps extends AppCompatActivity {
                 HoldUserInfo.getInstance().setUser_disliked_apps(restrictedApps);
 
                 AppsDataBaseHelper db_helper = new AppsDataBaseHelper(PickApps.this,null,null,2);
-                List<String> rec_apps = db_helper.loadHandler();
-                //List<String> messages = Arrays.asList("Hello", "World!", "How", "Are", "You");
-                HoldUserInfo.getInstance().setUser_has_been_recommended(rec_apps);
+                Map<String,List<String>> rec_apps = db_helper.loadHandler();
+
+                HoldUserInfo.getInstance().setUser_to_be_rec(rec_apps);
+
                 UserDataBaseHelper userDB = new UserDataBaseHelper(PickApps.this);
                 userDB.addUser(HoldUserInfo.getInstance().getUser_email(),
                                HoldUserInfo.getInstance().getUser_name(),

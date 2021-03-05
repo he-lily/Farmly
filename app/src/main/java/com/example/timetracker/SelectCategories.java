@@ -67,67 +67,67 @@ public class SelectCategories extends AppCompatActivity {
     public void onCheckboxClicked(View view) {
         selected_categories = new ArrayList<String>();
         if(fitness.isChecked()){
-            selected_categories.add(fitness.getText().toString());
+            selected_categories.add("\"FITNESS\"");
         }
         if(edu.isChecked()){
-            selected_categories.add(edu.getText().toString());
+            selected_categories.add("\"EDUCATION\"");
         }
         if(finance.isChecked()){
-            selected_categories.add(finance.getText().toString());
+            selected_categories.add("\"FINANCE\"");
         }
         if(music.isChecked()){
-            selected_categories.add(music.getText().toString());
+            selected_categories.add("\"MUSIC_AND_AUDIO\"");
         }
         if(food.isChecked()){
-            selected_categories.add(food.getText().toString());
+            selected_categories.add("\"FOOD_AND_DRINK\"");
         }
         if(gaming.isChecked()){
-            selected_categories.add(gaming.getText().toString());
+            selected_categories.add("\"GAME\"");
         }
         if(sports.isChecked()){
-            selected_categories.add(sports.getText().toString());
+            selected_categories.add("\"SPORTS\"");
         }
         if(housing.isChecked()){
-            selected_categories.add(housing.getText().toString());
+            selected_categories.add("\"HOUSE_AND_HOME\"");
         }
         if(dating.isChecked()){
-            selected_categories.add(dating.getText().toString());
+            selected_categories.add("\"DATING\"");
         }
         if(social.isChecked()){
-            selected_categories.add(social.getText().toString());
+            selected_categories.add("\"SOCIAL\"");
         }
         if(parenting.isChecked()){
-            selected_categories.add(parenting.getText().toString());
+            selected_categories.add("\"PARENTING\"");
         }
         if(shopping.isChecked()){
-            selected_categories.add(shopping.getText().toString());
+            selected_categories.add("\"SHOPPING\"");
         }
         if(beauty.isChecked()){
-            selected_categories.add(beauty.getText().toString());
+            selected_categories.add("\"BEAUTY\"");
         }
         if(photography.isChecked()){
-            selected_categories.add(photography.getText().toString());
+            selected_categories.add("\"PHOTOGRAPHY\"");
         }
         if(art.isChecked()){
-            selected_categories.add(art.getText().toString());
+            selected_categories.add("\"ART_AND_DESIGN\"");
         }
         if(medical.isChecked()){
-            selected_categories.add(medical.getText().toString());
+            selected_categories.add("\"MEDICAL\"");
         }
         if(productivity.isChecked()){
-            selected_categories.add(productivity.getText().toString());
+            selected_categories.add("\"PRODUCTIVITY\"");
         }
         if(news.isChecked()){
-            selected_categories.add(news.getText().toString());
+            selected_categories.add("\"NEWS_AND_MAGAZINES\"");
         }
         if(lifestyle.isChecked()){
-            selected_categories.add(lifestyle.getText().toString());
+            selected_categories.add("\"LIFESTYLE\"");
         }
         if(entertainment.isChecked()){
-            selected_categories.add(entertainment.getText().toString());
+            selected_categories.add("\"ENTERTAINMENT\"");
         }
         if(travel.isChecked()){
-            selected_categories.add(travel.getText().toString());
+            selected_categories.add("\"TRAVEL_AND_LOCAL\"");
         }
     }
 }

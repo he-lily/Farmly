@@ -6,6 +6,7 @@ package com.example.timetracker;
         import android.database.sqlite.SQLiteDatabase;
         import android.database.sqlite.SQLiteException;
         import android.database.sqlite.SQLiteOpenHelper;
+        import android.os.Build;
         import android.widget.Toast;
         import android.database.Cursor;
         import java.io.File;
@@ -16,10 +17,13 @@ package com.example.timetracker;
         import java.io.OutputStream;
 
         import androidx.annotation.Nullable;
+        import androidx.annotation.RequiresApi;
 
         import java.util.ArrayList;
         import java.util.Arrays;
+        import java.util.HashMap;
         import java.util.List;
+        import java.util.Map;
 
 public class AppsDataBaseHelper extends SQLiteOpenHelper {
     private Context context;
@@ -27,7 +31,11 @@ public class AppsDataBaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION         = 3;
     private static String DB_PATH = "/data/user/0/com.example.timetracker/databases/";
     SQLiteDatabase AppDataBase;
+
     List<String> recommended_apps = new ArrayList<>();
+    List<String> has_added = new ArrayList<>();
+    List<String> inner_list = new ArrayList<>();
+    Map<String,List<String>> to_be_rec = new HashMap<String,List<String>>();
 
     public AppsDataBaseHelper(@Nullable Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context,DATABASE_NAME,factory,DATABASE_VERSION);
@@ -97,7 +105,8 @@ public class AppsDataBaseHelper extends SQLiteOpenHelper {
         super.close();
     }
 
-    public List<String> loadHandler(){
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Map<String,List<String>> loadHandler(){
         try{
             createDatabase();
         }catch (IOException e){
@@ -105,7 +114,9 @@ public class AppsDataBaseHelper extends SQLiteOpenHelper {
         }
         String result = "";
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery("select * from App",null);
+        String cat_list = HoldUserInfo.getInstance().getUser_preferred_categories().toString().substring(1, HoldUserInfo.getInstance().getUser_preferred_categories().toString().length() - 1);
+        Cursor c = db.rawQuery("select * from App where CATEGORY in (" + cat_list + ")" ,null);
+        int counter = 0;
 
         while(c.moveToNext()){
             String app_name = c.getString(0);
@@ -117,19 +128,33 @@ public class AppsDataBaseHelper extends SQLiteOpenHelper {
             int app_review_count = c.getInt(6);
             int app_downloads = c.getInt(7);
             float app_price = c.getFloat(8);
-            System.out.println("APP CATEGORY: " + app_category);
-            if(recommended_apps == null || recommended_apps.size() < 4 && HoldUserInfo.getInstance().getUser_has_been_recommended() == null || !HoldUserInfo.getInstance().getUser_has_been_recommended().contains(app_name)
-                    && HoldUserInfo.getInstance().getUser_preferred_categories().contains(app_category)){
-                recommended_apps.add(app_name);
+
+            if(recommended_apps == null || recommended_apps.size() < 4 && (HoldUserInfo.getInstance().getUser_has_been_recommended() == null
+                    || !HoldUserInfo.getInstance().getUser_has_been_recommended().contains(app_name))){
+                if(has_added == null || (has_added.size() <= HoldUserInfo.getInstance().getUser_preferred_categories().size())){
+                    if(has_added == null || !has_added.contains(app_category)) {
+                        recommended_apps.add(app_name);
+                        has_added.add(app_category);
+                        inner_list.add(app_url);
+                        inner_list.add(app_logo);
+                        to_be_rec.put(app_name,inner_list);
+                        inner_list=new ArrayList<String>();
+                    }
+                    else if(HoldUserInfo.getInstance().getUser_preferred_categories().size() == has_added.size()){
+                        has_added.clear();
+                    }
+                }
             }
             if(recommended_apps.size() == 3){
                 break;
             }
 
+
         }
+        HoldUserInfo.getInstance().setUser_has_been_recommended(recommended_apps);
         c.close();
         db.close();
-        return recommended_apps;
+        return to_be_rec;
     }
 
 
