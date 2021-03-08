@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         UserEmail = findViewById(R.id.email_addr);
         //save info to UserDB and move to next activity
         UserInfoButton.setOnClickListener(view -> {
+            userAppHistory.app_usage.add(2, userAppHistory.category_usage);
             Intent intent = new Intent(MainActivity.this,AppDescript1.class);
             //UserDataBaseHelper userDB = new UserDataBaseHelper(MainActivity.this);
             /*
