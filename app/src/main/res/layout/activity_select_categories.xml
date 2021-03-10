@@ -17,7 +17,7 @@
         android:id="@+id/catergories_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:fontFamily="sans-serif-black"
@@ -37,10 +37,11 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
+        android:gravity="center_horizontal"
         android:text="@string/cat_description"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.706"
+        app:layout_constraintHorizontal_bias="0.603"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/catergories_title" />
 
@@ -349,17 +350,17 @@
 
     <Button
         android:id="@+id/save_categories"
-        android:layout_width="350dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="16dp"
-        android:text="I'M READY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:text="NEXT"
         app:backgroundTint="#4CAF50"
         app:layout_constraintBottom_toBottomOf="@+id/select_cat_act"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entertain_cb"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
