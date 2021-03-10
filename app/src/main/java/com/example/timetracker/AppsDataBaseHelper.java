@@ -4,65 +4,158 @@ package com.example.timetracker;
         import android.content.ContentValues;
         import android.content.Context;
         import android.database.sqlite.SQLiteDatabase;
+        import android.database.sqlite.SQLiteException;
         import android.database.sqlite.SQLiteOpenHelper;
+        import android.os.Build;
         import android.widget.Toast;
+        import android.database.Cursor;
+        import java.io.File;
+        import java.io.FileOutputStream;
+        import java.io.FileInputStream;
+        import java.io.IOException;
+        import java.io.InputStream;
+        import java.io.OutputStream;
 
         import androidx.annotation.Nullable;
+        import androidx.annotation.RequiresApi;
 
+        import java.util.ArrayList;
+        import java.util.Arrays;
+        import java.util.HashMap;
         import java.util.List;
+        import java.util.Map;
 
 public class AppsDataBaseHelper extends SQLiteOpenHelper {
     private Context context;
-    private static final String DATABASE_NAME         = "Apps.db";
-    private static final int DATABASE_VERSION         = 1;
+    private static final String DATABASE_NAME         = "GoogleStoreApps.db";
+    private static final int DATABASE_VERSION         = 3;
+    private static String DB_PATH = "/data/user/0/com.example.timetracker/databases/";
+    SQLiteDatabase AppDataBase;
 
-    private static final String TABLE_NAME             = "Apps";
-    private static String COLUMN_ID                    = "_id";
-    private static String COLUMN_CATEGORY              = "app_category";
-    private static String COLUMN_IOS_COMPATIBILITY     = "app_ios_compatibility";
-    private static String COLUMN_ANDROID_COMPATIBILITY = "app_android_compatibility";
-    private static String COLUMN_RECOMMENDATION_SCORE  = "app_recommendation_score";
-    private static String COLUMN_APP_NAME              = "app_name";
+    List<String> recommended_apps = new ArrayList<>();
+    List<String> has_added = new ArrayList<>();
+    List<String> inner_list = new ArrayList<>();
+    Map<String,List<String>> to_be_rec = new HashMap<String,List<String>>();
 
-    public AppsDataBaseHelper(@Nullable Context context){
-        super(context,DATABASE_NAME,null,DATABASE_VERSION);
+    public AppsDataBaseHelper(@Nullable Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
+        super(context,DATABASE_NAME,factory,DATABASE_VERSION);
         this.context = context;
     }
     @Override
     public void onCreate(SQLiteDatabase db){
-        String query =
-                "CREATE TABLE " + TABLE_NAME + " ("  +
-                        COLUMN_ID                    + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_CATEGORY              + " TEXT, " +
-                        COLUMN_IOS_COMPATIBILITY     + " BOOL, "   +
-                        COLUMN_ANDROID_COMPATIBILITY + " BOOL, " +
-                        COLUMN_APP_NAME              + "TEXT, "   +
-                        COLUMN_RECOMMENDATION_SCORE  + " FLOAT);";
 
-        db.execSQL(query);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1){
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
+
 
     }
+    private boolean checkDatabase(){
+        try{
+            final String mPath = DB_PATH + DATABASE_NAME;
+            final File file = new File(mPath);
+            if(file.exists())
+                return true;
+            else
+                return false;
 
-    void addAppRecRank(String app_category, boolean app_ios_compat, boolean app_android_compat, float app_recommendation_score, String app_name){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv  = new ContentValues();
-
-        cv.put(COLUMN_CATEGORY,app_category);
-        cv.put(COLUMN_IOS_COMPATIBILITY,app_ios_compat);
-        cv.put(COLUMN_ANDROID_COMPATIBILITY,app_android_compat);
-        cv.put(COLUMN_RECOMMENDATION_SCORE,app_recommendation_score);
-        cv.put(COLUMN_APP_NAME,app_name);
-
-
-        long result = db.insert(TABLE_NAME,null,cv);
-        if(result == -1){
-            Toast.makeText(context,"Failed",Toast.LENGTH_SHORT).show();
+        }catch(SQLiteException e){
+            e.printStackTrace();
+            return false;
         }
     }
+    private void copyDatabase() throws IOException{
+        try{
+            InputStream mInputStream = context.getAssets().open(DATABASE_NAME);
+            String outFileName = DB_PATH + DATABASE_NAME;
+            OutputStream mOutputStream = new FileOutputStream(outFileName);
+            byte[] buffer = new byte[1024];
+            int length;
+            while((length = mInputStream.read(buffer)) > 0){
+                mOutputStream.write(buffer,0,length);
+            }
+            mOutputStream.flush();
+            mOutputStream.close();
+            mInputStream.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void createDatabase() throws IOException{
+        boolean mDatabaseExist = checkDatabase();
+        if(!mDatabaseExist){
+            this.getReadableDatabase();
+            this.close();
+            try{
+                copyDatabase();
+            }catch(IOException mIOException){
+                mIOException.printStackTrace();
+                throw new Error("Error copying database");
+            }finally {
+                this.close();
+            }
+        }
+    }
+    @Override
+    public synchronized void close(){
+        if(AppDataBase != null)
+            AppDataBase.close();
+        SQLiteDatabase.releaseMemory();
+        super.close();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Map<String,List<String>> loadHandler(){
+        try{
+            createDatabase();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        String result = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        String cat_list = HoldUserInfo.getInstance().getUser_preferred_categories().toString().substring(1, HoldUserInfo.getInstance().getUser_preferred_categories().toString().length() - 1);
+        Cursor c = db.rawQuery("select * from App where CATEGORY in (" + cat_list + ")" ,null);
+        int counter = 0;
+
+        while(c.moveToNext()){
+            String app_name = c.getString(0);
+            String app_id = c.getString(1);
+            String app_category = c.getString(2);
+            String app_url = c.getString(3);
+            String app_logo = c.getString(4);
+            Float app_rating_score = c.getFloat(5);
+            int app_review_count = c.getInt(6);
+            int app_downloads = c.getInt(7);
+            float app_price = c.getFloat(8);
+
+            if(recommended_apps == null || recommended_apps.size() < 4 && (HoldUserInfo.getInstance().getUser_has_been_recommended() == null
+                    || !HoldUserInfo.getInstance().getUser_has_been_recommended().contains(app_name))){
+                if(has_added == null || (has_added.size() <= HoldUserInfo.getInstance().getUser_preferred_categories().size())){
+                    if(has_added == null || !has_added.contains(app_category)) {
+                        recommended_apps.add(app_name);
+                        has_added.add(app_category);
+                        inner_list.add(app_url);
+                        inner_list.add(app_logo);
+                        to_be_rec.put(app_name,inner_list);
+                        inner_list=new ArrayList<String>();
+                    }
+                    else if(HoldUserInfo.getInstance().getUser_preferred_categories().size() == has_added.size()){
+                        has_added.clear();
+                    }
+                }
+            }
+            if(recommended_apps.size() == 3){
+                break;
+            }
+
+
+        }
+        HoldUserInfo.getInstance().setUser_has_been_recommended(recommended_apps);
+        c.close();
+        db.close();
+        return to_be_rec;
+    }
+
 
 }

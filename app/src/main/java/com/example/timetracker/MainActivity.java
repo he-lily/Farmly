@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         //      - App_usage is a list of size 2 (SUBJECT TO CHANGE)
         //      - Index 1: total time on apps
         //      - Index 2: list of top 5 apps used
+
         UserAppUsageHelper userAppHistory = new UserAppUsageHelper(MainActivity.this);
 
         UserInfoButton = findViewById(R.id.UserInfo_button);
@@ -36,12 +37,22 @@ public class MainActivity extends AppCompatActivity {
         UserEmail = findViewById(R.id.email_addr);
         //save info to UserDB and move to next activity
         UserInfoButton.setOnClickListener(view -> {
+            userAppHistory.app_usage.add(2, userAppHistory.category_usage);
             Intent intent = new Intent(MainActivity.this,AppDescript1.class);
-            UserDataBaseHelper userDB = new UserDataBaseHelper(MainActivity.this);
+            //UserDataBaseHelper userDB = new UserDataBaseHelper(MainActivity.this);
+            /*
             userDB.addUser(UserEmail.getText().toString(),
                     UserName.getText().toString(),
                     UserJob.getText().toString(),
                     Integer.parseInt(UserAge.getText().toString()), userAppHistory.app_usage.toString());
+
+             */
+            HoldUserInfo.getInstance().setUser_name(UserName.getText().toString());
+            HoldUserInfo.getInstance().setUser_email(UserEmail.getText().toString());
+            HoldUserInfo.getInstance().setUser_job(UserJob.getText().toString());
+            HoldUserInfo.getInstance().setUser_age(Integer.parseInt(UserAge.getText().toString()));
+            HoldUserInfo.getInstance().setUser_app_usage(userAppHistory.app_usage);
+
             startActivity(intent);
         });
     }
