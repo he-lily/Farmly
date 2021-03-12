@@ -10,64 +10,64 @@
         android:id="@+id/bigDesc"
         android:layout_width="321dp"
         android:layout_height="61dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-black"
-        android:gravity="center_horizontal"
         android:text="Creating your personalized screen usage plan..."
         android:textAlignment="center"
         android:textColor="#8BC34A"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:gravity="center_horizontal" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
         android:text="I'M READY"
         app:backgroundTint="#4CAF50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.821" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="99dp"
         android:layout_height="96dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.871"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/bigDesc"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/bigDesc"
+        app:layout_constraintTop_toBottomOf="@+id/bigDesc"
         app:srcCompat="@drawable/bell" />
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="99dp"
         android:layout_height="111dp"
-        android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.871"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bigDesc"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/bigDesc"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7"
         app:srcCompat="@drawable/settings" />
 
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="99dp"
         android:layout_height="103dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.871"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/notebook" />
+        android:layout_marginStart="222dp"
+        app:layout_constraintEnd_toEndOf="@+id/bigDesc"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/bigDesc"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:srcCompat="@drawable/notebook"
+        android:layout_marginLeft="222dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -77,10 +77,10 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
-        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintHorizontal_bias="0.616"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.491"
+        app:layout_constraintVertical_bias="0.508"
         android:gravity="center_horizontal" />
 
     <TextView
@@ -91,7 +91,7 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toStartOf="@+id/imageView7"
-        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintHorizontal_bias="0.616"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         android:gravity="center_horizontal" />
@@ -100,12 +100,14 @@
         android:id="@+id/textView3"
         android:layout_width="194dp"
         android:layout_height="39dp"
+        android:layout_marginEnd="28dp"
         android:text="Adjust your goals at any moment"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintEnd_toStartOf="@+id/imageView5"
-        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView5"
+        android:layout_marginRight="28dp"
         android:gravity="center_horizontal" />
 </androidx.constraintlayout.widget.ConstraintLayout>

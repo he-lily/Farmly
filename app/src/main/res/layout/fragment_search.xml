@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is the SEARCH page"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:text="This is the SEARCH page \n(NOT USED ANYMORE)"
+        android:textSize="30sp" />
 </RelativeLayout>

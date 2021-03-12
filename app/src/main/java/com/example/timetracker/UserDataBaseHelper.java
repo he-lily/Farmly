@@ -12,8 +12,8 @@ import java.util.List;
 
 public class UserDataBaseHelper extends SQLiteOpenHelper {
     private Context context;
-    private static final String DATABASE_NAME = "UserInfo.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final String DATABASE_NAME = "UserInfo4.db";
+    private static final int DATABASE_VERSION = 1;
 
     private static final String TABLE_NAME = "Users";
     private static String COLUMN_ID = "_id";
@@ -23,6 +23,9 @@ public class UserDataBaseHelper extends SQLiteOpenHelper {
     private static String COLUMN_AGE = "user_age";
     private static String COLUMN_OS = "system_os";
     private static String COLUMN_HABITS = "screen_time_habits";
+    private static String COLUMN_RECOMMENDED = "has_been_recommended";
+    private static String COLUMN_PREFERRED_CAT = "preferred_categories";
+    private static String COLUMN_DISLIKED_APPS = "disliked_apps";
 
     public UserDataBaseHelper(@Nullable Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
@@ -38,7 +41,12 @@ public class UserDataBaseHelper extends SQLiteOpenHelper {
                         COLUMN_JOB    + " TEXT, " +
                         COLUMN_AGE    + " INTEGER, " +
                         COLUMN_OS     + " TEXT, " +
-                        COLUMN_HABITS + " TEXT);";
+                        COLUMN_HABITS + " TEXT, " +
+                      COLUMN_RECOMMENDED + " TEXT, " +
+                        COLUMN_PREFERRED_CAT + " TEXT, " +
+                        COLUMN_DISLIKED_APPS + " TEXT);";
+
+
         db.execSQL(query);
     }
     @Override
@@ -48,21 +56,28 @@ public class UserDataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    void addUser(String user_email, String user_name, String user_job, int user_age, String app_usage){
+    void addUser(String user_email, String user_name, String user_job, int user_age, String app_usage, String has_been_recommended, String preferred_categories, String disliked_apps){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-
         cv.put(COLUMN_EMAIL,user_email);
         cv.put(COLUMN_NAME,user_name);
         cv.put(COLUMN_JOB,user_job);
         cv.put(COLUMN_AGE,user_age);
         cv.put(COLUMN_OS,System.getProperty("os.name"));
         cv.put(COLUMN_HABITS, app_usage);
+        cv.put( COLUMN_RECOMMENDED,has_been_recommended);
+        cv.put(COLUMN_PREFERRED_CAT,preferred_categories);
+        cv.put(COLUMN_DISLIKED_APPS,disliked_apps);
+
 
         long result = db.insert(TABLE_NAME,null,cv);
         if(result == -1){
             Toast.makeText(context,"Failed",Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
+
 
 }

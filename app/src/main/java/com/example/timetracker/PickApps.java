@@ -5,19 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class PickApps extends AppCompatActivity {
     List<String> allApps;
     RecyclerView recyclerView;
     Button pickAppsButton;
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
+    List<String> restrictedApps;
+    //@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +37,29 @@ public class PickApps extends AppCompatActivity {
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        /** Added button functionality here so we can get to the next activity. Change anything if you need to. **/
         pickAppsButton = findViewById(R.id.save_apps);
         pickAppsButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             public void onClick(View view){
                 Intent intent = new Intent(PickApps.this, SetLimits.class);
+                restrictedApps = myAdapter.checkedItems;
+                HoldUserInfo.getInstance().setUser_disliked_apps(restrictedApps);
+
+                AppsDataBaseHelper db_helper = new AppsDataBaseHelper(PickApps.this,null,null,2);
+                Map<String,List<String>> rec_apps = db_helper.loadHandler();
+
+                HoldUserInfo.getInstance().setUser_to_be_rec(rec_apps);
+
+                UserDataBaseHelper userDB = new UserDataBaseHelper(PickApps.this);
+                userDB.addUser(HoldUserInfo.getInstance().getUser_email(),
+                               HoldUserInfo.getInstance().getUser_name(),
+                               HoldUserInfo.getInstance().getUser_job(),
+                               HoldUserInfo.getInstance().getUser_age(),
+                               HoldUserInfo.getInstance().getUser_app_usage().toString(),
+                               HoldUserInfo.getInstance().getUser_has_been_recommended().toString(),
+                               HoldUserInfo.getInstance().getUser_preferred_categories().toString(),
+                               HoldUserInfo.getInstance().getUser_disliked_apps().toString());
+
                 startActivity(intent);
             }
         });
