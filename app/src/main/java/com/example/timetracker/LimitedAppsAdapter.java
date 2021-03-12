@@ -11,13 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class LimitedAppsAdapter extends RecyclerView.Adapter<LimitedAppsAdapter.ViewHolder> {
-    ArrayList<String> mAppNames = new ArrayList<>();
-    ArrayList<String> mAppTimes = new ArrayList<>();
+    List<String> mAppNames;
+    List<Double> mAppTimes;
     Context mContext;
 
-    public LimitedAppsAdapter(Context context, ArrayList<String> appNames, ArrayList<String> appTimes){
+    public LimitedAppsAdapter(Context context, List<String> appNames, List<Double> appTimes){
         mContext = context;
         mAppNames = appNames;
         mAppTimes = appTimes;
@@ -34,7 +36,7 @@ public class LimitedAppsAdapter extends RecyclerView.Adapter<LimitedAppsAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.limitedApp.setText(mAppNames.get(position));
-        holder.limitedTime.setText(mAppTimes.get(position));
+        holder.limitedTime.setText(mAppTimes.get(position).toString());
         holder.limitedBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

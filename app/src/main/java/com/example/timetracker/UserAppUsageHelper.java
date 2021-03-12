@@ -120,6 +120,8 @@ public class UserAppUsageHelper {
         app_usage.add(0, totalAppUsageTime);
         app_usage.add(1, top5Apps);
         app_usage.add(2, category_usage);
+        app_usage.add(3, allUsedApps);
+
 
         System.out.println("TOTAL TIME:");
         System.out.println(totalAppUsageTime);
