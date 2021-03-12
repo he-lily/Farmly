@@ -20,6 +20,7 @@ public class HoldUserInfo {
     private List<String> preferred_categories;
     private List<String> has_been_recommended;
     private Map<String,List<String>> to_be_rec;
+    private Map<String,String> all_apps;
 
     public String getUser_name() {return user_name;}
     public void setUser_name(String user_name) {this.user_name = user_name;}
@@ -54,6 +55,9 @@ public class HoldUserInfo {
     }
     public void setUser_to_be_rec(Map<String,List<String>> to_be_rec){this.to_be_rec = to_be_rec;}
     public Map<String,List<String>>  getUser_to_be_rec() {return to_be_rec;}
+
+    public void setUser_all_apps(Map<String,String> all_apps){this.all_apps = all_apps;}
+    public Map<String,String>  getUser_all_apps() {return all_apps;}
 
     private static final HoldUserInfo holder = new HoldUserInfo();
     public static HoldUserInfo getInstance() {return holder;}

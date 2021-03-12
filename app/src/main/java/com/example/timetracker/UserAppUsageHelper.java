@@ -11,6 +11,9 @@ import android.os.Build;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -20,7 +23,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
+import org.jsoup.UnsupportedMimeTypeException;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -31,6 +36,7 @@ public class UserAppUsageHelper {
     public List<Object> app_usage = new ArrayList<>();
     public final static String GOOGLE_URL = "https://play.google.com/store/apps/details?id=";
     Map<String, Double> category_usage = createMap();
+    Map<String, String> allApps_Map = new HashMap<>();
 
     
     private static Map<String, Double> createMap() {
@@ -130,15 +136,24 @@ public class UserAppUsageHelper {
     private class CategoriesTask extends AsyncTask<Map<String,Double>, Void, Map<String,Double>> {
         @Override
         protected Map<String,Double> doInBackground(Map<String,Double> ... url) {
-            try {
+           try {
                 Document doc = Jsoup.connect((String)url[0].keySet().toArray()[0]).get();
                 Elements scriptElements = doc.getElementsByTag("script");
-
+                System.out.println("INSIDE CATEGORY TASK:) " );
                 for (Element element : scriptElements) {
                     if (element.data().contains("applicationCategory")) {
                         String category = element.data().substring(element.data().indexOf("applicationCategory"));
+                        String app_logo = element.data().substring(element.data().indexOf("\"image\""));
+                        String app_name = element.data().substring(element.data().indexOf("\"name\""));
+                        app_name = app_name.substring(8,app_name.indexOf(",")-1);
+                        app_logo = app_logo.substring(9, app_logo.indexOf(",")-1);
                         category = category.substring(22, category.indexOf(",")-1);
+                        allApps_Map.put(app_name.toLowerCase(), app_logo);
+                        if(!allApps_Map.isEmpty()) {
+                            HoldUserInfo.getInstance().setUser_all_apps(allApps_Map);
+                            System.out.println("DICT: " + allApps_Map);
 
+                        }
                         if (category.contains("GAME"))
                             category = "GAME";
 
@@ -151,9 +166,14 @@ public class UserAppUsageHelper {
                         }
                     }
                 }
-            } catch (Exception e) { }
+           }
+           catch (MalformedURLException e) {System.out.println(" MalformedURLException " ); }
+           catch(HttpStatusException e1) {System.out.println(" HttpStatusException " ); }
+           catch(UnsupportedMimeTypeException e2) {System.out.println(" UnsupportedMimeTypeException " ); }
+           catch(SocketTimeoutException e3) {System.out.println(" SocketTimeoutException " ); }
+           catch(IOException e4) {System.out.println(" IOException " ); }
 
-            return null;
+           return null;
         }
 
         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -173,12 +193,14 @@ public class UserAppUsageHelper {
     private String getCategory(String query_url, Double timeTotal) {
         Map<String,Double> urlSet = new HashMap<>();
         urlSet.put(query_url, timeTotal);
-
         CategoriesTask task = new CategoriesTask();
+
+        System.out.println("DICT: " + HoldUserInfo.getInstance().getUser_all_apps());
         task.execute(urlSet);
 
         return "";
     }
+
 
 
     private List<String> getTop5AppsUsed(HashMap<String,Double> allApps){

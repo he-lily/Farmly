@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,7 +22,8 @@ public class PickApps extends AppCompatActivity {
     RecyclerView recyclerView;
     Button pickAppsButton;
     List<String> restrictedApps;
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
+    //@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,9 +27,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private SparseBooleanArray mCheckedItems = new SparseBooleanArray();
     List<String> checkedItems = new ArrayList<String>();
 
+
     public MyAdapter(Context ct, List<String> s1){
         context = ct;
         data1 = s1;
+
     }
 
     @NonNull
@@ -40,9 +44,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position){
         holder.checkBox.setOnCheckedChangeListener(null);
+
         holder.checkBox.setText(data1.get(position));
+
+        System.out.println("THE LINK:  " + HoldUserInfo.getInstance().getUser_all_apps());
+        System.out.println("THE KEY:  " + data1.get(position));
+
+        if(HoldUserInfo.getInstance().getUser_all_apps().containsKey(data1.get(position))) {
+            System.out.println("Theree is a picture " + data1.get(position));
+            Picasso.with(context).load(HoldUserInfo.getInstance().getUser_all_apps().get(data1.get(position))).into(holder.myImage);
+        }else{
+            Picasso.with(context).load("https://play-lh.googleusercontent.com/O-7F6uiQOUbCPpfa80BldoKEiNDUekj5NBXYiJvx8fpZxT_Uuw0iAYHIKNa7yUXHbbs").into(holder.myImage);
+        }
         if(holder.checkBox.isChecked()){
-            System.out.println("THIS CHECK BOX VALUE IS: ");
             System.out.println(holder.checkBox.getText().toString());
         }
         holder.checkBox.setChecked(mCheckedItems.get(position));
@@ -85,10 +99,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
         CheckBox checkBox;
+        ImageView myImage;
         ConstraintLayout mainLayout;
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             checkBox = itemView.findViewById(R.id.checkBox3);
+            myImage = itemView.findViewById(R.id.app_icon);
             mainLayout = itemView.findViewById(R.id.mainActivity);
 
         }

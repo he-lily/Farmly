@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
     EditText UserJob;
     EditText UserEmail;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
+    //@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,18 +36,11 @@ public class MainActivity extends AppCompatActivity {
         UserAge = findViewById(R.id.age_prompt);
         UserJob = findViewById(R.id.job_prompt);
         UserEmail = findViewById(R.id.email_addr);
-        //save info to UserDB and move to next activity
+
         UserInfoButton.setOnClickListener(view -> {
             userAppHistory.app_usage.add(2, userAppHistory.category_usage);
             Intent intent = new Intent(MainActivity.this,AppDescript1.class);
-            //UserDataBaseHelper userDB = new UserDataBaseHelper(MainActivity.this);
-            /*
-            userDB.addUser(UserEmail.getText().toString(),
-                    UserName.getText().toString(),
-                    UserJob.getText().toString(),
-                    Integer.parseInt(UserAge.getText().toString()), userAppHistory.app_usage.toString());
 
-             */
             HoldUserInfo.getInstance().setUser_name(UserName.getText().toString());
             HoldUserInfo.getInstance().setUser_email(UserEmail.getText().toString());
             HoldUserInfo.getInstance().setUser_job(UserJob.getText().toString());
