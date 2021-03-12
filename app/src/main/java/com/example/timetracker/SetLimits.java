@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SetLimits extends AppCompatActivity {
     Button generatingPlan;
-    RecyclerView rv;
+    RecyclerView recyclerView ;
     List<String> mAppNames;
     List<Double> mAppTimes = new ArrayList<>();
 

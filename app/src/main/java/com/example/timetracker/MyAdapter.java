@@ -47,11 +47,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         holder.checkBox.setText(data1.get(position));
 
-        System.out.println("THE LINK:  " + HoldUserInfo.getInstance().getUser_all_apps());
-        System.out.println("THE KEY:  " + data1.get(position));
-
         if(HoldUserInfo.getInstance().getUser_all_apps().containsKey(data1.get(position))) {
-            System.out.println("Theree is a picture " + data1.get(position));
             Picasso.with(context).load(HoldUserInfo.getInstance().getUser_all_apps().get(data1.get(position))).into(holder.myImage);
         }else{
             Picasso.with(context).load("https://play-lh.googleusercontent.com/O-7F6uiQOUbCPpfa80BldoKEiNDUekj5NBXYiJvx8fpZxT_Uuw0iAYHIKNa7yUXHbbs").into(holder.myImage);
