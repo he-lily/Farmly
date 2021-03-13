@@ -33,7 +33,7 @@ public class FragmentPlanAdapter extends RecyclerView.Adapter<FragmentPlanAdapte
 
     @Override
     public void onBindViewHolder(@NonNull fpViewHolder holder, int position) {
-        holder.catName.setText(mCatNames.get(position));
+        holder.catName.setText(mCatNames.get(position).replace("\"", ""));
         holder.catTime.setText(mCatTimes.get(position).toString() + " mins");
     }
 
