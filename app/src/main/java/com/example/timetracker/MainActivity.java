@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 
 public class MainActivity extends AppCompatActivity {
+
     Button UserInfoButton;
     EditText UserName;
     EditText UserAge;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
                     Integer.parseInt(UserAge.getText().toString()), userAppHistory.app_usage.toString());
             startActivity(intent);
         });
+
+
     }
 
 
