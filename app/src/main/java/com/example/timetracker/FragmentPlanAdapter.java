@@ -15,14 +15,12 @@ import java.util.List;
 public class FragmentPlanAdapter extends RecyclerView.Adapter<FragmentPlanAdapter.fpViewHolder>{
     List<String> mCatNames;
     List<Double> mCatTimes;
-    List<ProgressBar> mCatBar;
     Context mContext;
 
-    public FragmentPlanAdapter(Context context, List<String> catNames, List<Double> catTimes, List<ProgressBar> catBar){
+    public FragmentPlanAdapter(Context context, List<String> catNames, List<Double> catTimes){
         mContext = context;
         mCatNames = catNames;
         mCatTimes = catTimes;
-        mCatBar = catBar;
     }
 
     @NonNull
@@ -35,8 +33,8 @@ public class FragmentPlanAdapter extends RecyclerView.Adapter<FragmentPlanAdapte
 
     @Override
     public void onBindViewHolder(@NonNull fpViewHolder holder, int position) {
-        holder.catName.setText(mCatNames.get(position));
-        holder.catTime.setText(mCatTimes.get(position).toString() + " mins");
+        holder.catName.setText(mCatNames.get(position).replace("\"", ""));
+        holder.catTime.setText(mCatTimes.get(position).toString() + " \n/ 30 mins");
     }
 
     @Override

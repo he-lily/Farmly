@@ -32,7 +32,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 
-public class UserAppUsageHelper {
+public class  UserAppUsageHelper {
     private final Context context;
     public List<Object> app_usage = new ArrayList<>();
     public final static String GOOGLE_URL = "https://play.google.com/store/apps/details?id=";

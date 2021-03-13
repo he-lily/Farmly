@@ -38,10 +38,6 @@ public class BottomNavView extends AppCompatActivity {
                             selectedFragment=new FragmentPlan();
                             break;
 
-                        case R.id.nav_search:
-                            selectedFragment=new FragmentSearch();
-                            break;
-
                         case R.id.nav_goals:
                             selectedFragment=new FragmentGoals();
                             break;

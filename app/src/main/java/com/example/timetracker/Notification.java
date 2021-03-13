@@ -9,9 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+
 public class Notification extends AppCompatActivity {
-
-
     Context myContext;
     NotificationCompat.Builder builder = new NotificationCompat.Builder(myContext, "MyNotification");
     builder.setSmallIcon(R.drawable.notification_icon);
