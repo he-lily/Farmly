@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/*
+This class implements the Decription of the App. And waits until the user clicks
+continue to navigate to the next page
+*/
+
 public class AppDescript1 extends AppCompatActivity {
     Button descript1Button;
     @Override

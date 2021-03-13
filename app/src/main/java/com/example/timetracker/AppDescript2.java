@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/* 
+This class implements the second portion of the app description.
+As with part 1, waits unlick user decides to proceed forwared
+*/
 public class AppDescript2 extends AppCompatActivity {
     Button descript2Button;
     @Override
