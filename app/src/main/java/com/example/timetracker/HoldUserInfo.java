@@ -17,6 +17,7 @@ about the user's app usage is needed, this class holds all the needed informatio
 Calling these methods will give you the desired portion while also avoiding uncessarly computation and function calling. 
 */
 
+
 public class HoldUserInfo {
     private String user_name;
     private String user_email;

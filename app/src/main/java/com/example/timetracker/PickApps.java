@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+//this class takes the user's selected apps and adds them to the user DB
 public class PickApps extends AppCompatActivity {
     List<String> allApps;
     RecyclerView recyclerView;
