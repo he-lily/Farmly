@@ -1,6 +1,12 @@
 import sqlite3
 
+## This code goes through each row (app) of the Application Database and makes a base recommendation score for it
+## Score is based on 4 categories (price, downloads, ratings, and reviews) with each category having a scoring system 
+## from 1 to 10. Meaning that the lowest score can be 4 and the highest can be 40. This is then added into the Database
+## under the column titled BASESCORE
 
+
+## Assigns score for price
 def assignPriceScore(price):
     if (0.0 == price):
         return 10
@@ -23,7 +29,7 @@ def assignPriceScore(price):
     else:
         return 1
 
-
+## Assigns score for downloads
 def assignDownloadsScore(downloads):
     if (downloads in ["10+", "50+", "100+", "500+", "1,000+"]):
         return 1
@@ -45,8 +51,8 @@ def assignDownloadsScore(downloads):
         return 9
     elif (downloads in ["5,000,000,000+", "1,000,000,000+"]):
         return 10
-
     
+## Assigns score for ratings
 def assignRatingScore(score):
     if (4.0 <= score and score < 4.1):
         return 1
@@ -69,7 +75,7 @@ def assignRatingScore(score):
     else:
         return 10
 
-
+## Assigns score for reviews
 def assignReviewScore(score):
     if (1000 > score):
         return 1
@@ -92,7 +98,8 @@ def assignReviewScore(score):
     else:
         return 10
     
-
+    
+## Calculates base score for each app and stores it back into the db
 def main():    
     connection = sqlite3.connect("GoogleStoreApps.db")
     cursor     = connection.cursor()
