@@ -1,17 +1,14 @@
 
 package com.example.timetracker;
 
-        import android.content.ContentValues;
         import android.content.Context;
         import android.database.sqlite.SQLiteDatabase;
         import android.database.sqlite.SQLiteException;
         import android.database.sqlite.SQLiteOpenHelper;
         import android.os.Build;
-        import android.widget.Toast;
         import android.database.Cursor;
         import java.io.File;
         import java.io.FileOutputStream;
-        import java.io.FileInputStream;
         import java.io.IOException;
         import java.io.InputStream;
         import java.io.OutputStream;
@@ -20,17 +17,16 @@ package com.example.timetracker;
         import androidx.annotation.RequiresApi;
 
         import java.util.ArrayList;
-        import java.util.Arrays;
         import java.util.HashMap;
         import java.util.List;
         import java.util.Map;
 
 public class AppsDataBaseHelper extends SQLiteOpenHelper {
     private Context context;
-    private static final String DATABASE_NAME         = "GoogleStoreApps.db";
-    private static final int DATABASE_VERSION         = 3;
+    private static final String DATABASE_NAME         = "GoogleStoreApps1.db";
+    private static final int DATABASE_VERSION         = 5;
     private static String DB_PATH = "/data/user/0/com.example.timetracker/databases/";
-    SQLiteDatabase AppDataBase;
+    SQLiteDatabase AppDataBase1;
 
     List<String> recommended_apps = new ArrayList<>();
     List<String> has_added = new ArrayList<>();
@@ -99,8 +95,8 @@ public class AppsDataBaseHelper extends SQLiteOpenHelper {
     }
     @Override
     public synchronized void close(){
-        if(AppDataBase != null)
-            AppDataBase.close();
+        if(AppDataBase1 != null)
+            AppDataBase1.close();
         SQLiteDatabase.releaseMemory();
         super.close();
     }
@@ -116,8 +112,8 @@ public class AppsDataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String cat_list = HoldUserInfo.getInstance().getUser_preferred_categories().toString().substring(1, HoldUserInfo.getInstance().getUser_preferred_categories().toString().length() - 1);
         Cursor c = db.rawQuery("select * from App where CATEGORY in (" + cat_list + ")" ,null);
-        int counter = 0;
-
+        int prev_score = 0;
+        int critera = 30;
         while(c.moveToNext()){
             String app_name = c.getString(0);
             String app_id = c.getString(1);
@@ -128,17 +124,25 @@ public class AppsDataBaseHelper extends SQLiteOpenHelper {
             int app_review_count = c.getInt(6);
             int app_downloads = c.getInt(7);
             float app_price = c.getFloat(8);
+            int base_line = c.getInt(9);
+
+
 
             if(recommended_apps == null || recommended_apps.size() < 4 && (HoldUserInfo.getInstance().getUser_has_been_recommended() == null
                     || !HoldUserInfo.getInstance().getUser_has_been_recommended().contains(app_name))){
                 if(has_added == null || (has_added.size() <= HoldUserInfo.getInstance().getUser_preferred_categories().size())){
                     if(has_added == null || !has_added.contains(app_category)) {
+                        if(critera > 0 && critera < 30 && prev_score < 18 && base_line < 18){
+                            continue;
+                        }
+                        prev_score = base_line;
                         recommended_apps.add(app_name);
                         has_added.add(app_category);
                         inner_list.add(app_url);
                         inner_list.add(app_logo);
                         to_be_rec.put(app_name,inner_list);
                         inner_list=new ArrayList<String>();
+                        critera = critera - base_line;
                     }
                     else if(HoldUserInfo.getInstance().getUser_preferred_categories().size() == has_added.size()){
                         has_added.clear();
@@ -152,6 +156,7 @@ public class AppsDataBaseHelper extends SQLiteOpenHelper {
 
         }
         HoldUserInfo.getInstance().setUser_has_been_recommended(recommended_apps);
+        System.out.println("TO BE REC" + to_be_rec);
         c.close();
         db.close();
         return to_be_rec;
