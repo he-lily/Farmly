@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -26,8 +27,12 @@ public class FragmentPlan extends Fragment {
     RecyclerView rv;
     List<String> catPref;
     List<Double> prefTimes = new ArrayList<>();
-    ImageView recImage;
-    TextView recName;
+    ImageView recImage1;
+    ImageView recImage2;
+    ImageView recImage3;
+    TextView recName1;
+    TextView recName2;
+    TextView recName3;
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         catUsage = (HashMap<String,Double>)HoldUserInfo.getInstance().getUser_app_usage().get(2); //Map for usage of all categories
@@ -51,14 +56,26 @@ public class FragmentPlan extends Fragment {
         rv.setAdapter(ad);
 
         recApps = HoldUserInfo.getInstance().getUser_to_be_rec();
-        String firstKey = recApps.keySet().iterator().next();
-        List<String> ra = recApps.get(firstKey);
+        Iterator<String> itr = recApps.keySet().iterator();
+        String firstKey = itr.next();
+        List<String> ra1 = recApps.get(firstKey);
+        String secondKey = itr.next();
+        List<String> ra2 = recApps.get(secondKey);
+        String thirdKey = itr.next();
+        List<String> ra3 = recApps.get(thirdKey);
 
-        recImage = view.findViewById(R.id.recImage);
-        Picasso.with(view.getContext()).load(ra.get(1)).into(recImage);
-
-        recName = view.findViewById(R.id.recName);
-        recName.setText(firstKey);
+        recImage1 = view.findViewById(R.id.recImage1);
+        Picasso.with(view.getContext()).load(ra1.get(1)).into(recImage1);
+        recName1 = view.findViewById(R.id.recName1);
+        recName1.setText(firstKey);
+        recImage2 = view.findViewById(R.id.recImage2);
+        Picasso.with(view.getContext()).load(ra2.get(1)).into(recImage2);
+        recName2 = view.findViewById(R.id.recName2);
+        recName2.setText(secondKey);
+        recImage3 = view.findViewById(R.id.recImage3);
+        Picasso.with(view.getContext()).load(ra3.get(1)).into(recImage3);
+        recName3 = view.findViewById(R.id.recName3);
+        recName3.setText(thirdKey);
 
         return view;
     }

@@ -48,42 +48,94 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.957" />
+        app:layout_constraintVertical_bias="0.697" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPLAN"
-        android:layout_width="410dp"
-        android:layout_height="403dp"
+        android:layout_width="412dp"
+        android:layout_height="288dp"
         app:layout_constraintBottom_toTopOf="@+id/bigDesc3"
         app:layout_constraintEnd_toEndOf="@+id/bigDesc2"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="@+id/bigDesc2"
         app:layout_constraintTop_toBottomOf="@+id/bigDesc2"
-        app:layout_constraintVertical_bias="0.583" />
+        app:layout_constraintVertical_bias="0.223" />
 
     <ImageView
-        android:id="@+id/recImage"
-        android:layout_width="113dp"
-        android:layout_height="112dp"
+        android:id="@+id/recImage1"
+        android:layout_width="91dp"
+        android:layout_height="75dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.244"
+        app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bigDesc3"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.071"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+    <ImageView
+        android:id="@+id/recImage3"
+        android:layout_width="91dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bigDesc3"
+        app:layout_constraintVertical_bias="0.49"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <TextView
-        android:id="@+id/recName"
+        android:id="@+id/recName3"
         android:layout_width="163dp"
         android:layout_height="23dp"
         android:gravity="center_horizontal"
         android:text="APP NAME"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/recImage"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/recImage3"
+        app:layout_constraintStart_toStartOf="@+id/recImage3"
+        app:layout_constraintTop_toBottomOf="@+id/recImage3" />
+
+    <ImageView
+        android:id="@+id/recImage2"
+        android:layout_width="91dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginLeft="104dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.234"
-        app:layout_constraintStart_toEndOf="@+id/recImage"
-        app:layout_constraintTop_toTopOf="@+id/recImage" />
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toEndOf="@+id/recImage1"
+        app:layout_constraintTop_toBottomOf="@+id/bigDesc3"
+        app:layout_constraintVertical_bias="0.071"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+    <TextView
+        android:id="@+id/recName1"
+        android:layout_width="163dp"
+        android:layout_height="23dp"
+        android:gravity="center_horizontal"
+        android:text="APP NAME"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/recImage1"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="@+id/recImage1"
+        app:layout_constraintTop_toBottomOf="@+id/recImage1" />
+
+    <TextView
+        android:id="@+id/recName2"
+        android:layout_width="163dp"
+        android:layout_height="23dp"
+        android:gravity="center_horizontal"
+        android:text="APP NAME"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/recImage2"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="@+id/recImage2"
+        app:layout_constraintTop_toBottomOf="@+id/recImage2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
