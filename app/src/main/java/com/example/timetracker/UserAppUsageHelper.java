@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -31,6 +30,18 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+/*
+This class's primiary job is gathering the neccessary information regarding the user's app usage. To do this,
+we use the package UsageStatsManager to get the user info. It is then parsed into different objects and into 
+app_usage. We also run threads to gather information on the applications currently stored on the user's phone. 
+
+app_usage has the following structure:
+    1. totalAppUsageTime  - an interger that shows the total amount of time spent on apps in seconds
+    2. top5Apps           - a list of strings showing the top 5 appplications by name
+    3. category_usage     - a Map with strings as keys and doubles as values, shows the 21 categories with the time spent on each one
+    4. allUsedApps        - a Mash with strings as keys and doubles as values, shows each app and its time usage
+*/
+  
 
 public class  UserAppUsageHelper {
     private final Context context;
