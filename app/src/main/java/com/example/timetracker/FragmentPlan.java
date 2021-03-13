@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,7 +22,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+//this class displays the UI for user plan
 public class FragmentPlan extends Fragment {
+    HashMap<String,Double> catUsage;   //usage (in seconds) for each category chosen by the user during onboarding
+    List<String> catPref;  //a list of the user's preferred category(s) of apps they want to spend more time on
+    List<Double> prefTimes; //the time (in seconds) a user has spent on each "preferred" app as chosen during onboarding
+
     Map<String,List<String>> recApps;
     HashMap<String,Double> catUsage;
     RecyclerView rv;
@@ -33,8 +39,10 @@ public class FragmentPlan extends Fragment {
     TextView recName1;
     TextView recName2;
     TextView recName3;
+
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //load data from database into these variables
         catUsage = (HashMap<String,Double>)HoldUserInfo.getInstance().getUser_app_usage().get(2); //Map for usage of all categories
         catPref = HoldUserInfo.getInstance().getUser_preferred_categories(); //String List for preferred categories
 
@@ -46,6 +54,9 @@ public class FragmentPlan extends Fragment {
                 System.out.println("COULD NOT ADD: " + catPref.get(i));
             }
         }
+
+        //create plan UI fragment
+        return inflater.inflate(R.layout.fragment_plan, container, false);
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
 
