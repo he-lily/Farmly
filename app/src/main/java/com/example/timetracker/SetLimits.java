@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+//this class sets limits for users based on their app usage preferences
 public class SetLimits extends AppCompatActivity {
     Button generatingPlan;
     RecyclerView recyclerView;

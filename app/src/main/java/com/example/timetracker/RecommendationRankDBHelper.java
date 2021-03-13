@@ -11,6 +11,8 @@ package com.example.timetracker;
 
         import java.util.List;
 
+//this class creates the DB for user ranked apps that we will recommend them
+//includes CRUD functionality
 public class RecommendationRankDBHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME         = "RecommendationRank.db";

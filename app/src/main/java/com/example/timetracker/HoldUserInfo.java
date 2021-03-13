@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+//this class provides get/set methods for data in DB
 public class HoldUserInfo {
     private String user_name;
     private String user_email;

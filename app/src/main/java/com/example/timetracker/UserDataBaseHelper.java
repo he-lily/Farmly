@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
+//this class creates the Users db and provides CRUD functionality
 public class UserDataBaseHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "UserInfo4.db";

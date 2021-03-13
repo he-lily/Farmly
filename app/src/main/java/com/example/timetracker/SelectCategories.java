@@ -63,7 +63,7 @@ public class SelectCategories extends AppCompatActivity {
         });
     }
 
-
+    //add selected categories
     public void onCheckboxClicked(View view) {
         selected_categories = new ArrayList<String>();
         if(fitness.isChecked()){
