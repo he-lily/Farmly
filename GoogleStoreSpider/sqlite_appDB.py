@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 
+## Called from appstore_spider.py. Opens and inserts the app and its info the the Application Database
 
 class GoogleStoreAppDB:
     def __init__(self):

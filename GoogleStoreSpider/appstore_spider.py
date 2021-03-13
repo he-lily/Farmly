@@ -27,8 +27,9 @@ class appStoreSpider(scrapy.Spider):
 					 'SOCIAL', 'SPORTS', 'TRAVEL_AND_LOCAL'}
 		self.log_file   = open("spider_logger.txt", 'w')
 		self.categories = open("categories.json", 'w')
-
-
+		
+	
+	## start paths include all 21 app categories. Spider is then instructed to run through them
 	def start_requests(self):
 		start_paths = ["https://play.google.com/store/apps/category/ART_AND_DESIGN",
 			       "https://play.google.com/store/apps/category/BEAUTY",
@@ -54,36 +55,44 @@ class appStoreSpider(scrapy.Spider):
 		for path in start_paths:
 			yield scrapy.Request(path, self.parse)
 
-
+			
+	## Used for debugging purposes in case of a variety of failures to add an app to the database
 	def _write_to_log(self, statement, app_name, app_url):
 		try:
 			self.log_file.write(statement + app_name + "\n" + app_url + "\n\n")
 		except:
 			self.log_file.write(statement + "  [UNABLE TO DECODE APP INFO -> UNDEFINED]\n\n")
 
-
+			
+	
 	def parse(self, response):
 		resp_sel = Selector(response)
 		sites = resp_sel.xpath('//a/@href').extract() 
 
 		for site in sites:
+			## Finds the links and runs through them
 			url = response.urljoin(site)
 			if (re.match(self.app_pattern, url)):
 				yield scrapy.Request(url, self.parse)
 
+		## Gathers application info if is an app
 		app_info = response.xpath('//script[@type="application/ld+json"]//text()').extract_first()
-
+		
+		
 		if (app_info):
 			app_json = json.loads(app_info)
-
+			
+			## assigns correct category to app
 			if 'GAME' in app_json['applicationCategory']:
 				genre = 'GAME'
 			else:
 				genre = app_json['applicationCategory']
-
+				
+			# Validates catgeory is still being searched and we are still searching for apps
 			if (len(self.valid_categories) > 0):
 				if (genre in self.valid_categories):
 					try:
+						## gathers all neeeded info from each category
 						app_id = response.url.split("?id=")[-1].split("&")[0]
 
 						if (app_id not in self.all_apps):
@@ -96,7 +105,8 @@ class appStoreSpider(scrapy.Spider):
 								app_logo  = app_json['image']
 								downloads = response.xpath("//div[contains(text(), 'Installs')]/..//text()").getall()[1]
 								price     = app_json['offers'][0]['price']
-
+								
+								## Success! Adds app to db
 								appDBhelper = GoogleStoreAppDB()
 								succeeded = appDBhelper.insert(name, app_id, genre, url, app_logo, rating_score, review_count, downloads, price)
 
