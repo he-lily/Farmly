@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.HashMap;
 import java.util.List;
 
+//this class displays the UI for user plan
 public class FragmentPlan extends Fragment {
-    HashMap<String,Double> catUsage;
-    List<String> catPref;
-    List<Double> prefTimes;
+    HashMap<String,Double> catUsage;   //usage (in seconds) for each category chosen by the user during onboarding
+    List<String> catPref;  //a list of the user's preferred category(s) of apps they want to spend more time on
+    List<Double> prefTimes; //the time (in seconds) a user has spent on each "preferred" app as chosen during onboarding
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //load data from database into these variables
         catUsage = (HashMap<String,Double>)HoldUserInfo.getInstance().getUser_app_usage().get(2); //Map for usage of all categories
         catPref = HoldUserInfo.getInstance().getUser_preferred_categories(); //String List for preferred categories
 
@@ -34,7 +36,7 @@ public class FragmentPlan extends Fragment {
                 System.out.println("COULD NOT ADD: " + catPref.get(i));
             }
         }
-
+        //create plan UI fragment
         return inflater.inflate(R.layout.fragment_plan, container, false);
     }
 
