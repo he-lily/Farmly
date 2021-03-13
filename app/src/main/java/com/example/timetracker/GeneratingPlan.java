@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class GeneratingPlan extends AppCompatActivity {
 
     @Override
@@ -20,6 +24,7 @@ public class GeneratingPlan extends AppCompatActivity {
             public void onClick(View view){
                 Intent intent = new Intent(GeneratingPlan.this, BottomNavView.class);
                 startActivity(intent);
+               
             }
         });
     }

@@ -34,8 +34,8 @@ public class Notification extends AppCompatActivity {
             NotificationChannel channel = new NotificationChannel("MyNotification", "MyNotification", importance);
             channel.setDescription(description);
             //register channel with system
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            NotificationManager.createNotificationChannel(channel);
+            NotificationManager notificationManager1 = getSystemService(NotificationManager.class);
+            notificationManager1.createNotificationChannel(channel);
         }
     }
 }
