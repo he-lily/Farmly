@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class FragmentPlan extends Fragment {
     HashMap<String,Double> catUsage;
+    RecyclerView rv;
     List<String> catPref;
     List<Double> prefTimes;
     @Nullable
@@ -34,8 +36,20 @@ public class FragmentPlan extends Fragment {
                 System.out.println("COULD NOT ADD: " + catPref.get(i));
             }
         }
+        View view = inflater.inflate(R.layout.fragment_plan, container, false);
 
-        return inflater.inflate(R.layout.fragment_plan, container, false);
+        rv = view.findViewById(R.id.recyclerViewPLAN);
+        FragmentPlanAdapter ad = new FragmentPlanAdapter(getActivity(), catPref, prefTimes);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        rv.setLayoutManager(llm);
+        rv.setAdapter(ad);
+
+        return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
 }

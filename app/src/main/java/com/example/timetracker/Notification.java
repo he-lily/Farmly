@@ -7,6 +7,7 @@ import android.os.Build;
 import androidx.core.app.NotificationCompat;
 
 public class Notification {
+    /**
     String textTitle="";
     String textContent="";
 
@@ -32,4 +33,5 @@ public class Notification {
             NotificationManager.createNotificaitonChannel(channel);
         }
     }
+     **/
 }

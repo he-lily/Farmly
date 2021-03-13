@@ -39,7 +39,7 @@ public class LimitedAppsAdapter extends RecyclerView.Adapter<LimitedAppsAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.limitedApp.setText(mAppNames.get(position));
-        holder.limitedTime.setText(mAppTimes.get(position).toString());
+        holder.limitedTime.setText("0 mins");
         if(HoldUserInfo.getInstance().getUser_all_apps().containsKey(mAppNames.get(position))) {
             Picasso.with(mContext).load(HoldUserInfo.getInstance().getUser_all_apps().get(mAppNames.get(position))).into(holder.myImage);
         }else{

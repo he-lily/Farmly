@@ -15,14 +15,12 @@ import java.util.List;
 public class FragmentPlanAdapter extends RecyclerView.Adapter<FragmentPlanAdapter.fpViewHolder>{
     List<String> mCatNames;
     List<Double> mCatTimes;
-    List<ProgressBar> mCatBar;
     Context mContext;
 
-    public FragmentPlanAdapter(Context context, List<String> catNames, List<Double> catTimes, List<ProgressBar> catBar){
+    public FragmentPlanAdapter(Context context, List<String> catNames, List<Double> catTimes){
         mContext = context;
         mCatNames = catNames;
         mCatTimes = catTimes;
-        mCatBar = catBar;
     }
 
     @NonNull
