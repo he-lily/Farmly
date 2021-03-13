@@ -67,7 +67,7 @@ public class SelectCategories extends AppCompatActivity {
     public void onCheckboxClicked(View view) {
         selected_categories = new ArrayList<String>();
         if(fitness.isChecked()){
-            selected_categories.add("\"FITNESS\"");
+            selected_categories.add("\"HEALTH_AND_FITNESS\"");
         }
         if(edu.isChecked()){
             selected_categories.add("\"EDUCATION\"");
