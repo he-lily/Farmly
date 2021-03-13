@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,15 +13,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FragmentPlan extends Fragment {
+    Map<String,List<String>> recApps;
     HashMap<String,Double> catUsage;
     RecyclerView rv;
     List<String> catPref;
     List<Double> prefTimes = new ArrayList<>();
+    ImageView recImage;
+    TextView recName;
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         catUsage = (HashMap<String,Double>)HoldUserInfo.getInstance().getUser_app_usage().get(2); //Map for usage of all categories
@@ -41,6 +49,16 @@ public class FragmentPlan extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
         rv.setAdapter(ad);
+
+        recApps = HoldUserInfo.getInstance().getUser_to_be_rec();
+        String firstKey = recApps.keySet().iterator().next();
+        List<String> ra = recApps.get(firstKey);
+
+        recImage = view.findViewById(R.id.recImage);
+        Picasso.with(view.getContext()).load(ra.get(1)).into(recImage);
+
+        recName = view.findViewById(R.id.recName);
+        recName.setText(firstKey);
 
         return view;
     }
